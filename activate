@@ -1,0 +1,24 @@
+#!/usr/bin/env fish
+# Why not python -m venv? uv is faster and keeps parity with dependency workflow.
+# Why not modify parent shell? fish scripts cannot alter parent env reliably; spawn a subshell.
+
+set -l script_path (status --current-filename)
+set -l project_root (dirname $script_path)
+cd $project_root
+
+if not type -q uv
+    echo "uv not found. Install: curl -LsSf https://astral.sh/uv/install.sh | sh" 1>&2
+    exit 127
+end
+
+if not test -d .venv
+    uv venv .venv
+end
+
+if not test -f .venv/bin/activate.fish
+    echo ".venv/bin/activate.fish not found" 1>&2
+    exit 1
+end
+
+exec fish --interactive --init-command "source .venv/bin/activate.fish; cd $project_root; echo '(uv) activated in ' $project_root"
+

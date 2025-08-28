@@ -12,8 +12,11 @@ dependencies = [
     "matplotlib>=3.10.5",
     "notebook>=7.4.4",
     "numpy>=2.3.2",
+    "pipeline>=0.1.0",
     "scikit-learn>=1.7.1",
     "tensorflow>=2.20.0",
+    "tf-keras>=2.15.0",
     "torch>=2.7.1",
     "torchvision>=0.22.1",
+    "transformers>=4.55.4",
 ]
